@@ -1,4 +1,4 @@
-{-# LANGUAGE GADTs, RecordWildCards, ScopedTypeVariables #-}
+{-# LANGUAGE CPP, GADTs, RecordWildCards, ScopedTypeVariables #-}
 module Data.Eigen.SparseMatrix.Mutable (
     -- * Mutable SparseMatrix
     IOSparseMatrix(..),
@@ -29,6 +29,10 @@ module Data.Eigen.SparseMatrix.Mutable (
 ) where
 
 import Prelude hiding (read)
+#if __GLASGOW_HASKELL__ >= 710
+#else
+import Control.Applicative hiding (empty)
+#endif
 import Data.Complex
 import Foreign.C.String
 import Foreign.C.Types
